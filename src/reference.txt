@@ -1,0 +1,136 @@
+post("/posts", (req, res) -> {
+			try {
+				ObjectMapper mapper = new ObjectMapper();
+				NewPostPayload creation = mapper.readValue(req.body(),NewPostPayload.class);
+				if (!creation.isValid()) {
+					res.status(HTTP_BAD_REQUEST);
+					return "";
+				}
+
+				int id = model.createPost(creation.getTitle(), creation.getContent(), creation.getCategories());
+				res.status(200);
+				res.type("application/json");
+				return id;
+			} catch (JsonParseException jpe) {
+				res.status(HTTP_BAD_REQUEST);
+				return "";
+			}
+		});
+
+		get("/posts", (req, res) -> {
+			Set<String> heads = req.headers();
+			for(String str:heads){
+				System.out.println(str);
+			}
+			
+			res.status(200);
+			res.type("application/json");
+			String foo = "";
+			if(req.queryParamsValues("fname")!=null){
+				foo+=req.queryParamsValues("fname")[0]+" ";
+			}
+			if(req.queryParamsValues("lname")!=null){
+				foo+=req.queryParamsValues("lname")[0];
+			}
+			
+			
+			return dataToJson(model.getAllPosts()+dataToJson(foo));
+		});
+
+		post("/postse", (req, res) -> {
+			System.out.println("now is post");
+			
+			String foo = "";
+			Set<String> heads = req.headers();
+			for(String str:heads){
+				System.out.println(str+" = "+req.headers(str));
+			}
+			
+			System.out.println("body = "+req.body());
+			if(req.attribute("fname")!=null){
+				foo+="fname = "+req.params("fname");
+			}
+			if(req.params("lname")!=null){
+				foo+="fname = "+req.params("lname");
+			}
+			if(foo.length()==0){
+				return "no input";
+			}else{
+				return foo;
+			}
+		});
+
+		get("/postse", (req, res) -> {
+			System.out.println("now is get");
+			res.status(200);
+			res.type("application/json");
+			return dataToJson(model.getAllPosts());
+		});
+		
+		get("/postse1", (req, res) -> {
+			req.attribute("fff", 000);
+			redirect.get("/postse1", "/postse2");
+			return "";
+		});
+		
+		get("/postse2", (req, res) -> {
+			
+			
+			return req.attribute("fff");
+		});
+		
+		get("/postse3", (req, res) -> {
+			req.session().attribute("qtt", 66666);
+			
+			return "session attribute set";
+		});
+		
+		get("/postse4", (req, res) -> {
+			res.cookie("test", "value");
+			res.header("ss", "dd");
+			if(req.session().attribute("qtt")!=null){
+				return req.session().attribute("qtt");
+			}else{
+				return "session attribute is no set ";
+			}
+		});
+	
+		get("/postse5", (req, res) -> {
+			res.cookie("test9", "6666value");
+			return "cookie set ";
+		});
+		
+		post("/user/login", (req, res) -> {
+			System.out.println("start post");
+			try {
+				ObjectMapper mapper = new ObjectMapper();
+				User userinfo = mapper.readValue(req.body(),User.class);
+				if (!userinfo.isValid()) {
+					res.status(HTTP_BAD_REQUEST);
+					return "";
+				}
+				
+				res.status(200);
+				res.header("Access-Control-Max-Age", "1728000");
+				res.header("Access-Control-Expose-Headers", "ss,X-Authorization,Set-Cookie");
+				res.header("X-Authorization", "user");
+				res.header("ss", "ssss");
+				res.cookie("ssssss", "ssssaaaaaaaaa");
+				res.type("application/json");
+				
+				System.out.println();
+				return dataToJson(userinfo);
+			} catch (JsonParseException jpe) {
+				res.status(HTTP_BAD_REQUEST);
+				return "";
+			}
+		});
+		
+		get("/user/login", (req, res) -> {
+			res.header("Access-Control-Allow-Methods", "DELETE,POST,OPTIONS,GET");
+			res.header("Access-Control-Allow-Headers", "accept, content-type");
+			res.header("Access-Control-Max-Age", "1728000");
+			res.type("application/json");
+			return dataToJson("has sans");
+			
+		});
