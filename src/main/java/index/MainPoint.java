@@ -10,10 +10,12 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
-import Channel.Channel;
-import Channel.ChannelService;
+import channel.Channel;
+import channel.ChannelService;
 import member.Member;
 import member.MemberService;
+import transaction.Transaction;
+import transaction.TransactionService;
 import user.*;
 import util.EnableCORS;
 
@@ -218,8 +220,47 @@ public class MainPoint {
 			return resultString;
 		});
 		
-		//=============================			channel End			=========================================		
+//=============================			channel End			=========================================		
+
+//=============================			transaction Start		=========================================		
+		get("/transaction", (req, res) -> {
+			System.out.println("start get /transaction");
+			TransactionService transactionService = new TransactionService();
+			String resultString = ""; 
+			res.status(200);
+			res.type("application/json");
+			if(transactionService.getAll().size()==0){
+				resultString = "0";
+			}else{
+				resultString = dataToJson(transactionService.getAll());
+			}
+			System.out.println("resultString\n"+resultString);
+			return resultString;
+		});
+		get("/transaction/:id", (req, res) -> {
+			System.out.println("start get /transaction/:id");
+			TransactionService transactionService = new TransactionService();
+			String resultString = ""; 
+			res.status(200);
+			res.type("application/json");
+			String id = req.params("id");
+			Transaction transaction = null;
+			if(transactionService.getOne(id)==null){
+				transaction = new Transaction();
+				transaction.setId("0");
+			}else{
+				transaction = transactionService.getOne(id);
+			}
+			resultString = dataToJson(transaction);
+			System.out.println("resultString\n"+resultString);
+			return resultString;
+		});
 		
+//=============================			transaction End			=========================================
+
+
+
+
 	}
 	
 	public static String dataToJson(Object data) {

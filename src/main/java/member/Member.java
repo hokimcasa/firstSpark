@@ -1,6 +1,6 @@
 package member;
 
-import java.sql.Timestamp;;
+import java.sql.Timestamp;
 
 public class Member {
 	private String id;

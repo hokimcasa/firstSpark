@@ -1,4 +1,4 @@
-package Channel;
+package channel;
 
 import java.sql.Date;
 import java.sql.Timestamp;
