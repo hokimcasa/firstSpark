@@ -13,4 +13,11 @@ public class MemberService {
 		return DAO.getOne(id);
 	}
 
+	public Member update(Member member){
+		return DAO.update(member);
+	}
+	public Member insert(Member member){
+		return DAO.insert(member);
+	}
+	
 }

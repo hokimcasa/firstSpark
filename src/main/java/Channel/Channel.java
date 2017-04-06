@@ -1,13 +1,14 @@
 package Channel;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Channel {
 	private String id;
-	private String channelname;
+	private String channelName;
 	private Integer fee;
 	private String description;
-	private Date createDate;
+	private Timestamp createDate;
 	private String createUser;
 	public String getId() {
 		return id;
@@ -15,11 +16,11 @@ public class Channel {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getChannelname() {
-		return channelname;
+	public String getChannelName() {
+		return channelName;
 	}
-	public void setChannelname(String channelname) {
-		this.channelname = channelname;
+	public void setChannelName(String channelName) {
+		this.channelName = channelName;
 	}
 	public Integer getFee() {
 		return fee;
@@ -33,10 +34,10 @@ public class Channel {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 	public String getCreateUser() {

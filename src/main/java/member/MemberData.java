@@ -1,22 +1,25 @@
 package member;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class MemberData {
-	private ArrayList<Member> memberList = new ArrayList<Member>();
-	public ArrayList<Member> getMemberList() {
+	private static ArrayList<Member> memberList = new ArrayList<Member>();
+	private static boolean initflag = false;
+	private void init()
+	{
 		Member m1 =new Member();
 		m1.setId("A123456789");
 		m1.setName("張三蚵仔煎");
 		m1.setChannelId("C00001");
-		m1.setFee(0.13);
+		m1.setFee(13.0);
 		m1.setMobileNO("0987654321");
 		m1.setAccountNo("5424282625847430");
 		m1.setEmail("test1@sample.com");
 		m1.setAddress("106臺北市大安區新生南路2段86號");
 		m1.setWebSite("http://sample1.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00001");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -28,7 +31,7 @@ public class MemberData {
 		m1.setEmail("test2@sample.com");
 		m1.setAddress("台北市松山區八德路四段692號7-11樓");
 		m1.setWebSite("http://sample2.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00002");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -40,7 +43,7 @@ public class MemberData {
 		m1.setEmail("test3@sample.com");
 		m1.setAddress("臺北市大安區新生南路2段86號");
 		m1.setWebSite("http://sample3.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00001");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -52,7 +55,7 @@ public class MemberData {
 		m1.setEmail("test4@sample.com");
 		m1.setAddress("臺北市文山區木柵路三段220號");
 		m1.setWebSite("http://sample4.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00003");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -64,7 +67,7 @@ public class MemberData {
 		m1.setEmail("test5@sample.com");
 		m1.setAddress("臺北市中正區羅斯福路1段8號");
 		m1.setWebSite("http://sample5.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00002");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -76,7 +79,7 @@ public class MemberData {
 		m1.setEmail("test6@sample.com");
 		m1.setAddress("文山區興隆路二段160號");
 		m1.setWebSite("http://sample6.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00002");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -88,7 +91,7 @@ public class MemberData {
 		m1.setEmail("test7@sample.com");
 		m1.setAddress("臺北市內湖區民權東路6段99號");
 		m1.setWebSite("http://sample7.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00002");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -100,7 +103,7 @@ public class MemberData {
 		m1.setEmail("test5@sample.com");
 		m1.setAddress("臺北市萬華區和平西路3段120號");
 		m1.setWebSite("http://sample8.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00003");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -112,7 +115,7 @@ public class MemberData {
 		m1.setEmail("test9@sample.com");
 		m1.setAddress("新北市三重區新北大道一段11號");
 		m1.setWebSite("http://sample9.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00002");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -124,7 +127,7 @@ public class MemberData {
 		m1.setEmail("test10@sample.com");
 		m1.setAddress("'台北市南港區南港路一段360號");
 		m1.setWebSite("http://sample10.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00004");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -136,7 +139,7 @@ public class MemberData {
 		m1.setEmail("test11@sample.com");
 		m1.setAddress("臺北市士林區中正路439號");
 		m1.setWebSite("http://sample11.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00004");	
 		memberList.add(m1);
 		m1 = new Member();
@@ -148,9 +151,17 @@ public class MemberData {
 		m1.setEmail("test12@sample.com");
 		m1.setAddress("臺北市大同區昌吉街57號");
 		m1.setWebSite("http://sample12.com.tw");
-		m1.setCreateDate(new Date(System.currentTimeMillis()));
+		m1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		m1.setCreateUser("U00003");	
 		memberList.add(m1);
+	}
+	
+	public ArrayList<Member> getMemberList() {
+		if(!initflag){
+			init();
+			initflag = true;
+			System.out.println("------------------"+ "init  " +"--------------");
+		}
 		return memberList;
 	}
 	

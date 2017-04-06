@@ -1,6 +1,6 @@
 package member;
 
-import java.sql.Date;
+import java.sql.Timestamp;;
 
 public class Member {
 	private String id;
@@ -12,9 +12,9 @@ public class Member {
 	private String email;
 	private String address;
 	private String webSite;
-	private Date createDate;
+	private Timestamp createDate;
 	private String createUser;
-	private Date lastUpdate;
+	private Timestamp lastUpdate;
 	private String updateUser;
 	public String getId() {
 		return id;
@@ -70,10 +70,10 @@ public class Member {
 	public void setWebSite(String webSite) {
 		this.webSite = webSite;
 	}
-	public Date getCreateDate() {
+	public Timestamp getCreateDate() {
 		return createDate;
 	}
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
 	}
 	public String getCreateUser() {
@@ -82,10 +82,10 @@ public class Member {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
-	public Date getLastUpdate() {
+	public Timestamp getLastUpdate() {
 		return lastUpdate;
 	}
-	public void setLastUpdate(Date lastUpdate) {
+	public void setLastUpdate(Timestamp lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
 	public String getUpdateUser() {
@@ -94,6 +94,12 @@ public class Member {
 	public void setUpdateUser(String updateUser) {
 		this.updateUser = updateUser;
 	}
+	
+	public boolean isValid() {
+		return name!=null&&mobileNO!=null&&accountNo!=null
+				&&email!=null&&address!=null&&webSite!=null;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -102,6 +108,7 @@ public class Member {
 		result = prime * result + ((mobileNO == null) ? 0 : mobileNO.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
