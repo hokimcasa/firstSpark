@@ -7,4 +7,8 @@ public interface TransactionDAO_interface {
 	public Transaction getOne(String id);
 	public Transaction update(Transaction member);
 	public Transaction insert(Transaction member);
+	public List<Transaction> getWithinTheCondition(String channelId,
+			String startDate,String endDate,String membername);
+	public List<Transaction> getWithinTheCondition(String channelId,
+			String startDate,String endDate);
 }

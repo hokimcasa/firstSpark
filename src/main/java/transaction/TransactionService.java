@@ -19,5 +19,13 @@ public class TransactionService {
 	public Transaction insert(Transaction transaction){
 		return DAO.insert(transaction);
 	}
+
+	public List<Transaction> getWithinTheCondition(String channelId, String startDate, String endDate,
+			String membername){
+		return DAO.getWithinTheCondition(channelId,startDate,endDate,membername);
+	}
 	
+	public List<Transaction> getWithinTheCondition(String channelId, String startDate, String endDate){
+		return DAO.getWithinTheCondition(channelId,startDate,endDate);
+	}
 }

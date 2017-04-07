@@ -5,6 +5,7 @@ import static spark.Spark.*;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.sql.Timestamp;
+import java.util.List;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -237,6 +238,7 @@ public class MainPoint {
 			System.out.println("resultString\n"+resultString);
 			return resultString;
 		});
+		
 		get("/transaction/:id", (req, res) -> {
 			System.out.println("start get /transaction/:id");
 			TransactionService transactionService = new TransactionService();
@@ -252,6 +254,41 @@ public class MainPoint {
 				transaction = transactionService.getOne(id);
 			}
 			resultString = dataToJson(transaction);
+			System.out.println("resultString\n"+resultString);
+			return resultString;
+		});
+		
+		get("/transaction/:startDate/:endDate/:channelId/:membername", (req, res) -> {
+			System.out.println("start get /transaction/:startDate/:endDate/:channelid/:membername");
+			
+			TransactionService transactionService = new TransactionService();
+			List<Transaction> resultList = null;
+			String resultString = ""; 
+			res.status(200);
+			res.type("application/json");
+			String startDate = req.params("startDate");
+			String endDate = req.params("endDate");
+			String channelId = req.params("channelId");
+			String membername = req.params("membername");
+			System.out.println("startDate = "+startDate);
+			System.out.println("endDate = "+endDate);
+			System.out.println("channelId = "+channelId);
+			System.out.println("membername = "+membername);
+			if(membername.equals("null")||membername.isEmpty()){
+				resultList = transactionService.getWithinTheCondition(channelId, startDate, endDate);
+			}else{
+				resultList = transactionService.getWithinTheCondition(channelId, startDate, endDate,membername);
+			}
+			
+			
+			if(resultList.size()==0){
+				Transaction tmp = new Transaction();
+				tmp.setId("0");
+				resultList.add(tmp);
+				resultString = dataToJson(resultList);
+			}else{
+				resultString = dataToJson(resultList);
+			}
 			System.out.println("resultString\n"+resultString);
 			return resultString;
 		});
