@@ -84,6 +84,40 @@ public class MainPoint {
 			return resultString;
 		});
 		
+		post("/user/logout", (req, res) -> {
+			System.out.println("start post /user/logout");
+			try {
+				ObjectMapper mapper = new ObjectMapper();
+				User userinfo = mapper.readValue(req.body(),User.class);
+							
+				if (!userinfo.isValid()) {
+					res.status(HTTP_BAD_REQUEST);
+					return "";
+				}
+				
+				UserService userService = new UserService();
+				
+				if(!userService.loginCheck(userinfo)){
+					res.status(200);
+					res.header("Access-Control-Expose-Headers", "X-Authorization,Set-Cookie");
+					res.header("X-Authorization", "not_allowed");
+					return "";
+				}
+				String resultString = ""; 
+				res.status(200);
+				res.header("Access-Control-Expose-Headers", "X-Authorization,Set-Cookie");
+				res.header("X-Authorization", "logout");
+				res.type("application/json");
+				User user = userService.getOne(userinfo.getId());
+				user.setPassword(null);
+				resultString = dataToJson(user);
+				System.out.println("resultString\n"+resultString);
+				return resultString;
+			} catch (JsonParseException jpe) {
+				res.status(HTTP_BAD_REQUEST);
+				return "";
+			}
+		});
 //=============================			User End			=========================================
 
 		
