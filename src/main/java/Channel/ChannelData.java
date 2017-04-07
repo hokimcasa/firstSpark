@@ -5,8 +5,10 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class ChannelData {
-	private ArrayList<Channel> channelList = new ArrayList<Channel>();
-	public ArrayList<Channel> getChannelList() {
+	private static ArrayList<Channel> channelList = new ArrayList<Channel>();
+	private static boolean initflag = false;
+	private void init()
+	{
 		Channel c1 = new Channel();
 		c1.setId("C00001");
 		c1.setChannelName("通化街夜市公會");
@@ -39,6 +41,13 @@ public class ChannelData {
 		c1.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		c1.setCreateUser("U00003");	
 		channelList.add(c1);
+	}
+	
+	public ArrayList<Channel> getChannelList() {
+		if(!initflag){
+			init();
+			initflag = true;
+		}
 		return channelList;
 	}
 	

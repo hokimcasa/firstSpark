@@ -34,6 +34,7 @@ public class MemberInnerDao implements MemberDAO_interface {
 		updateMember.setAddress(member.getAddress());
 		updateMember.setUpdateUser(member.getUpdateUser());
 		updateMember.setLastUpdate(member.getLastUpdate());
+		updateMember.setChannelId(member.getChannelId());
 		Dao.getAll().set(index, updateMember);
 		return updateMember;
 	}

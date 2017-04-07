@@ -2,6 +2,8 @@ package channel;
 
 import java.util.List;
 
+import member.Member;
+
 public class ChannelInnerDao implements ChannelDAO_interface {
 	@Override
 	public List<Channel> getAll() {
@@ -18,6 +20,19 @@ public class ChannelInnerDao implements ChannelDAO_interface {
 			}		
 		}
 		return null;
+	}
+
+	@Override
+	public Channel update(Channel channel) {
+		ChannelInnerDao Dao = new ChannelInnerDao();
+		Channel updateChannel = Dao.getOne(channel.getId());
+		int index = Dao.getAll().indexOf(updateChannel);
+		updateChannel.setChannelName(channel.getChannelName());
+		updateChannel.setFee(channel.getFee());
+		updateChannel.setDescription(channel.getDescription());
+		Dao.getAll().set(index, updateChannel);
+		
+		return updateChannel;
 	}
 
 }

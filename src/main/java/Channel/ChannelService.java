@@ -12,5 +12,9 @@ public class ChannelService {
 	public Channel getOne(String id){
 		return DAO.getOne(id);
 	}
+	
+	public Channel update(Channel channel){
+		return DAO.update(channel);
+	}
 
 }

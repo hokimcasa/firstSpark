@@ -133,6 +133,7 @@ public class MainPoint {
 				res.status(HTTP_BAD_REQUEST);
 				return "0";
 			}
+			System.out.println("member.getChannelId() "+member.getChannelId());
 			member.setLastUpdate(new Timestamp(System.currentTimeMillis()));
 			MemberService memberService = new MemberService();
 			String resultString = ""; 
@@ -221,6 +222,35 @@ public class MainPoint {
 			return resultString;
 		});
 		
+		put("/channel/:id", (req, res) -> {
+			System.out.println("start "+req.requestMethod()+" /channel/:id");
+			try {
+			ObjectMapper mapper = new ObjectMapper();
+			Channel channel = mapper.readValue(req.body(),Channel.class);
+						
+			if (!channel.isValid()) {
+				res.status(HTTP_BAD_REQUEST);
+				return "0";
+			}
+			ChannelService channelService = new ChannelService();
+			String resultString = ""; 
+			res.status(200);
+			res.type("application/json");
+			String id = req.params("id");
+			if(channelService.getOne(id)==null){
+				resultString = dataToJson("0");
+			}else{
+				channel = channelService.update(channel);
+				resultString = dataToJson("1");
+			}
+			System.out.println("resultString\n"+resultString);
+			return resultString;
+			} catch (JsonParseException jpe) {
+				res.status(HTTP_BAD_REQUEST);
+				return "0";
+			}
+		});
+		
 //=============================			channel End			=========================================		
 
 //=============================			transaction Start		=========================================		
@@ -270,10 +300,6 @@ public class MainPoint {
 			String endDate = req.params("endDate");
 			String channelId = req.params("channelId");
 			String membername = req.params("membername");
-			System.out.println("startDate = "+startDate);
-			System.out.println("endDate = "+endDate);
-			System.out.println("channelId = "+channelId);
-			System.out.println("membername = "+membername);
 			if(membername.equals("null")||membername.isEmpty()){
 				resultList = transactionService.getWithinTheCondition(channelId, startDate, endDate);
 			}else{

@@ -46,6 +46,11 @@ public class Channel {
 	public void setCreateUser(String createUser) {
 		this.createUser = createUser;
 	}
+	
+	public boolean isValid() {
+		return channelName!=null&&fee!=null&&description!=null;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
