@@ -27,6 +27,7 @@ public class ChannelInnerDao implements ChannelDAO_interface {
 		ChannelInnerDao Dao = new ChannelInnerDao();
 		Channel updateChannel = Dao.getOne(channel.getId());
 		int index = Dao.getAll().indexOf(updateChannel);
+		System.out.println(channel.toString());
 		updateChannel.setChannelName(channel.getChannelName());
 		updateChannel.setFee(channel.getFee());
 		updateChannel.setDescription(channel.getDescription());

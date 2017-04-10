@@ -74,4 +74,9 @@ public class Channel {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Channel [id=" + id + ", channelName=" + channelName + ", fee=" + fee + ", description=" + description
+				+ ", createDate=" + createDate + ", createUser=" + createUser + "]";
+	}
 }
